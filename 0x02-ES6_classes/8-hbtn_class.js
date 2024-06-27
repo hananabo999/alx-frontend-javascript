@@ -1,41 +1,19 @@
 export default class HolbertonClass {
   constructor(size, location) {
-    this._size = this.validateNumber(size, 'Size');
-    this._location = this.validateString(location, 'Location');
-  }
-
-  // Validator for numbers
-  validateNumber(value, attributeName) {
-    if (typeof value !== 'number') {
-      throw new TypeError(`${attributeName} must be a number`);
+    if (typeof size !== 'number') {
+      throw new TypeError('Size must be a number');
+    } else if (typeof location !== 'string') {
+      throw new TypeError('Location must be a string');
     }
-    return value;
+
+    this._size = size;
+    this._location = location;
   }
 
-  // Validator for strings
-  validateString(value, attributeName) {
-    if (typeof value !== 'string') {
-      throw new TypeError(`${attributeName} must be a string`);
+  [Symbol.toPrimitive](hint) {
+    if (hint === 'number') {
+      return this._size;
     }
-    return value;
-  }
-
-  // Getters
-  get size() {
-    return this._size;
-  }
-
-  get location() {
-    return this._location;
-  }
-
-  // Override valueOf
-  valueOf() {
-    return this._size;
-  }
-
-  // Override toString
-  toString() {
     return this._location;
   }
 }
