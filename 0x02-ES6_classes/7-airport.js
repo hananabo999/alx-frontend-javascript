@@ -1,28 +1,16 @@
 export default class Airport {
   constructor(name, code) {
-    this._name = this.validateString(name, 'Name');
-    this._code = this.validateString(code, 'Code');
-  }
-
-  // Validator
-  validateString(value, attributeName) {
-    if (typeof value !== 'string') {
-      throw new TypeError(`${attributeName} must be a string`);
+    if (typeof name !== 'string') {
+      throw new TypeError('Name must be a string');
+    } else if (typeof code !== 'string') {
+      throw new TypeError('Code must be a string');
     }
-    return value;
+
+    this._name = name;
+    this._code = code;
   }
 
-  // Getters
-  get name() {
-    return this._name;
-  }
-
-  get code() {
-    return this._code;
-  }
-
-  // Override toString
-  toString() {
-    return `[object ${this._code}]`;
+  get [Symbol.toStringTag]() {
+    return `${this._code}`;
   }
 }
